@@ -1,3 +1,5 @@
+library(reshape2)
+
 features_cleaned <- read.table("features.txt",stringsAsFactors=FALSE)
 f_names <- features_cleaned[,2]
 varnames <- append(features_cleaned[,2],c("Subject","Activity"))
@@ -48,4 +50,4 @@ names(selected_df) <- gsub("tgravityacceleration","tgravity.acceleration", names
 fdf.melt <- melt(selected_df, id=c("subject","actlabel"))
 
 fdf.cast <- dcast(fdf.melt, subject+actlabel ~ variable,mean)
-write.csv(file="tidy_data.csv",x=fdf.cast)
+write.table(file="tidy_data.txt",x=fdf.cast)
